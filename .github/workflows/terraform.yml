@@ -55,13 +55,8 @@ permissions:
 jobs:
   terraform:
     name: 'Terraform'
-    runs-on: linux
-    environment: production
+    runs-on: aws-sandbox
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
 
     steps:
     # Checkout the repository to the GitHub Actions runner
