@@ -38,7 +38,7 @@ resource "random_id" "bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "learning-bucket${random_id.bucket_suffix.hex}"
+  bucket = "abdel-learning-bucket${random_id.bucket_suffix.hex}"
 
   tags = {
     Name        = "My Bucket"
