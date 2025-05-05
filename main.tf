@@ -123,3 +123,11 @@ resource "aws_instance" "my_ec2" {
     Name = "MyFirstEC2"
   }
 }
+# Output access key ID and secret key
+output "adam_user_access_key_id" {
+  value = aws_iam_access_key.adam_key.id
+}
+
+output "adam_user_secret_access_key" {
+  value = aws_iam_access_key.adam_key.secret
+}
