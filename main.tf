@@ -46,6 +46,39 @@ resource "aws_s3_bucket" "my_bucket" {
   }
 }
 
+resource "aws_iam_user" "adam" {
+  name = "adam"
+
+  tags = {
+    tag-key = "adam"
+  }
+}
+
+
+resource "aws_iam_access_key" "adam_key" {
+  user = aws_iam_user.adam.name
+}
+
+
+data "aws_iam_policy_document" "s3_write" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:PutObject",
+      "s3:DeleteObject"
+    ]
+    resources = [
+      "arn:aws:s3:::${aws_s3_bucket.my_bucket.bucket}/*"
+    ]
+  }
+
+}
+
+resource "aws_iam_user_policy" "adam_write" {
+  name   = "write"
+  user   = aws_iam_user.adam.name
+  policy = data.aws_iam_policy_document.s3_write.json
+}
 
 resource "aws_iam_role" "test_role" {
   name = "test_role"
