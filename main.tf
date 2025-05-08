@@ -46,20 +46,6 @@ resource "aws_s3_bucket" "my_bucket" {
   }
 }
 
-resource "aws_iam_user" "adam" {
-  name = "adam"
-
-  tags = {
-    tag-key = "adam"
-  }
-}
-
-
-resource "aws_iam_access_key" "adam_key" {
-  user = aws_iam_user.adam.name
-}
-
-
 data "aws_iam_policy_document" "s3_write" {
   statement {
     effect = "Allow"
@@ -72,12 +58,6 @@ data "aws_iam_policy_document" "s3_write" {
     ]
   }
 
-}
-
-resource "aws_iam_user_policy" "adam_write" {
-  name   = "write"
-  user   = aws_iam_user.adam.name
-  policy = data.aws_iam_policy_document.s3_write.json
 }
 
 resource "aws_iam_role" "test_role" {
@@ -123,11 +103,4 @@ resource "aws_instance" "my_ec2" {
     Name = "MyFirstEC2"
   }
 }
-# Output access key ID and secret key
-output "adam_user_access_key_id" {
-  value = aws_iam_access_key.adam_key.id
-}
 
-output "adam_user_secret_access_key" {
-  value = aws_iam_access_key.adam_key.secret
-}
