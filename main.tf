@@ -99,3 +99,13 @@ resource "aws_vpc" "custom_vpc" {
     Name = "custom_vpc"
   }
 }
+
+resource "aws_subnet" "custom_subnet" {
+  vpc_id     = aws.vpc.main.id
+  cidr_block = "10.0.1.0/24"
+
+  tags {
+    Name = "custom_subnet"
+  }
+
+}
