@@ -91,6 +91,11 @@ resource "aws_instance" "my_ec2" {
   }
 }
 
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+resource "aws_vpc" "custom_vpc" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "custom_vpc"
+  }
 }
