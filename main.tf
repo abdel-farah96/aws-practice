@@ -90,9 +90,7 @@ resource "aws_instance" "my_ec2" {
     Name = "MyFirstEC2"
   }
 }
-resource "aws_default_vpc" "default" {
-  tags = {
-    Name = "Default VPC"
-  }
 
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
 }
