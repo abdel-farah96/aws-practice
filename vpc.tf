@@ -18,7 +18,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id = aws_vpc.custom_vpc.id
+  vpc_id     = aws_vpc.custom_vpc.id
   cidr_block = "10.0.2.0/24"
 
   tags = {
@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "igw" {
     Name = "igw"
   }
 
-} 
+}
 
 resource "aws_eip" "nat_eip" {
   domain = "vpc"
@@ -43,7 +43,7 @@ resource "aws_eip" "nat_eip" {
 
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
-  subnet_id = aws_subnet.public_subnet.id
+  subnet_id     = aws_subnet.public_subnet.id
 
   tags = {
     Name = "NAT gateway"
